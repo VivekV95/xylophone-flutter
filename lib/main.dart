@@ -6,8 +6,17 @@ void main() => runApp(XylophoneApp());
 class XylophoneApp extends StatelessWidget {
   final player = AudioCache();
 
-  void playSound([soundNumber = 1]) {
+  void playSound(int soundNumber) {
     player.play('note$soundNumber.wav');
+  }
+
+  Expanded buildKey(int soundNumber, Color color) {
+    return Expanded(
+      child: FlatButton(
+        onPressed: () => this.playSound(soundNumber),
+        color: color,
+      ),
+    );
   }
 
   @override
@@ -16,38 +25,19 @@ class XylophoneApp extends StatelessWidget {
       home: Scaffold(
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              FlatButton(
-                onPressed: () => this.playSound(1),
-                color: Colors.red,
-              ),
-              FlatButton(
-                onPressed: () => this.playSound(2),
-                color: Colors.orange,
-              ),
-              FlatButton(
-                onPressed: () => this.playSound(3),
-                color: Colors.yellow,
-              ),
-              FlatButton(
-                onPressed: () => this.playSound(4),
-                color: Colors.green,
-              ),
-              FlatButton(
-                onPressed: () => this.playSound(5),
-                color: Colors.teal,
-              ),
-              FlatButton(
-                onPressed: () => this.playSound(6),
-                color: Colors.blue,
-              ),
-              FlatButton(
-                onPressed: () => this.playSound(7),
-                color: Colors.purple,
-              ),
+              buildKey(1, Colors.red),
+              buildKey(2, Colors.orange),
+              buildKey(3, Colors.yellow),
+              buildKey(4, Colors.green),
+              buildKey(5, Colors.teal),
+              buildKey(6, Colors.blue),
+              buildKey(7, Colors.purple),
             ],
           ),
         ),
+        backgroundColor: Colors.black,
       ),
     );
   }
